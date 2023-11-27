@@ -276,9 +276,9 @@ class Program
 
     static void Main(string[] args)
     {
-        const int BLOCK_SIZE = 4;
+        const int BLOCK_SIZE = 64;
         const int ROUNDS = 2;
-        const int MESSAGE_SIZE = 8; 
+        const int MESSAGE_SIZE = 128; 
         const int DEFAULT_VALUE = 0;
 
         int[] master_key = new int[BLOCK_SIZE];
@@ -288,7 +288,8 @@ class Program
         // on future message_size will not be necessary, missing information will be add on the last block
         // the implementation bellow its only for test to generate exact 2 blocks
 
-        string _message = "01101101";
+        // message example
+        string _message = "0100101111011011001101010110100111100010110111001011010111101001101110010110101111010001101010110100111101001111000101101110";
 
         int day = 1;
         int month = 1;
@@ -303,13 +304,7 @@ class Program
             catch {
                 message[i] = DEFAULT_VALUE;
             }
-        }
-
-
-        master_key[0] = 1;
-        master_key[1] = 0;
-        master_key[2] = 1;
-        master_key[3] = 1;       
+        }   
 
         int[] encriptedMessage = EncryptEcb(message, master_key, ROUNDS);
         int[] decriptedMessage = DecryptEcb(encriptedMessage, master_key, ROUNDS);
